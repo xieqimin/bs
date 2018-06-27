@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title>欢迎登陆</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-lg-6 offset-lg-3 well" >
+        <h1 class="text-center" style="margin-top: 40px">登陆</h1>
+        <form action="/login" method="post" >
+            <div class="form-group-lg">
+                <label  for="email"><h3>账户</h3></label>
+                <input type="text" class="form-control" id="email" placeholder="Email"/>
+            </div>
+            <div class="form-group-lg">
+                <label for="password"><h3>密码</h3></label>
+                <input type="password" class="form-control" id="password" placeholder="Password"/>
+            </div >
+            <div class="form-group-lg">
+                <button type="submit" class="btn btn-lg">登陆</button>
+                <button type="button"  class="btn btn-link btn-lg"><a href="/register.html">注册</a></button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
