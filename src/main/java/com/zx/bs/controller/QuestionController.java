@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -28,10 +29,17 @@ public class QuestionController {
 
     @RequestMapping(value="/")
     //TODO ???是否返回界面 是否返回回答列表
-    public ModelAndView index(Map<String,Object> map){
+    public ModelAndView index(Map<String,Object> map, HttpSession session){
         //TODO
         List<Question> questionList=questionService.findQuestion();
         map.put("question",questionList);
+        if(session.getAttribute("user_id")!=null)
+        {
+            map.put("login", true);
+            map.put("user_name",session.getAttribute("user_name"));
+        }else {
+            map.put("login", false);
+        }
         return new ModelAndView("index",map);
     }
 
@@ -39,7 +47,9 @@ public class QuestionController {
     @RequestMapping(value="/questionAdd", method = {RequestMethod.POST})
     @ResponseBody
     public Integer addTeacher(Question question){
+        System.out.println("hdfgd");
         Integer result=questionService.insertQuestion(question);
+        System.out.println("hd");
         return result;
     }
 

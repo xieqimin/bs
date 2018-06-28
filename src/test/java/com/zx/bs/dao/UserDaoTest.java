@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserDaoTest {
@@ -16,7 +15,7 @@ public class UserDaoTest {
     private UserDao userDao;
     @Test
     public void findStudentById() {
-        User user=userDao.findStudentById(12);
+        User user=userDao.findUserById(12);
         System.out.println(user.getUser_name());
     }
 

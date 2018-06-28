@@ -26,7 +26,7 @@ public class AnswerService {
         return integer;
     }
 
-    public List<Answer> findAnswerByStudentId(int id){
+    public List<Answer> findAnswerByUserId(int id){
         List<Answer> answerList=answerDao.findAnswerByUserId(id);
         return answerList;
     }
@@ -34,7 +34,7 @@ public class AnswerService {
         List<Answer> answerList=answerDao.findAnswerByQuestionId(id);
         return answerList;
     }
-    public List<Answer> findAnswerByStudentAndQuestionId(int s_id, int q_id){
+    public List<Answer> findAnswerByUserAndQuestionId(int s_id, int q_id){
         List<Answer> questionIdList=answerDao.findAnswerByUserAndQuestionId(s_id,q_id);
         return questionIdList;
     }

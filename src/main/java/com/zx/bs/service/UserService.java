@@ -12,11 +12,14 @@ public class UserService {
     @Autowired
     private UserDao studentDao;
 
-    public Integer findStudentByIdAndPasswd(int id, String pwd){
-        User student=studentDao.findUserByIdAndPasswd(id,pwd);
-        if(student!=null)
-        return 1;
-        else return -1;
+    public Integer findStudentByIdAndPasswd(int id, String pwd) {
+        User user = studentDao.findUserById(id);
+        if (user != null)
+            if (user.getUser_passwd().equals(pwd))
+                return 1;
+            else
+                return -1;//密码错误
+        else return -2;//没有此id
     }
     @Transactional
     public Integer insertStudent(User student){
@@ -29,7 +32,7 @@ public class UserService {
         return integer;
     }
     public User findStudentById(int id){
-        User student=studentDao.findStudentById(id);
+        User student=studentDao.findUserById(id);
         return student;
     }
 }

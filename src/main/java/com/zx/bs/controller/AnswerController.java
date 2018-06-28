@@ -3,15 +3,12 @@ package com.zx.bs.controller;
 import com.zx.bs.entity.Answer;
 import com.zx.bs.service.AnswerService;
 import com.zx.bs.service.QuestionService;
-import com.zx.bs.utils.ScoreUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //TODO 编写回答
 
@@ -59,14 +56,14 @@ public class AnswerController {
     @ResponseBody
     public List<Answer> findAnswerByStudentId(@PathVariable("id") Integer id){
 
-        return answerService.findAnswerByStudentId(id);
+        return answerService.findAnswerByUserId(id);
     }
 
     //返回学生的各科评分
 //    @RequestMapping(value="/score", method = {RequestMethod.POST})
 //    @ResponseBody
 //    public Map<String,Integer> scoreByStudentId(@RequestParam("student_id") int id){
-//        List<Answer> answerList=answerService.findAnswerByStudentId(id);
+//        List<Answer> answerList=answerService.findAnswerByUserId(id);
 //        HashMap<String,Integer> courseHashMap=new HashMap<>();
 //
 //        for(Answer answer:answerList){
