@@ -11,7 +11,8 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <!--<textarea class="form-control" rows="3" name=textarea></textarea>-->
 
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -55,31 +56,22 @@
     <!--<a href="#" class="card-link">Another link</a>-->
     <!--</div>-->
     <!--</div>-->
-    <div class="card" style="margin-bottom: 10px; margin-top: 20px;height: auto">
+    <div class="card" id="app" style="margin-bottom: 10px; margin-top: 20px;height: auto">
         <div class="card-header">我的回答</div>
         <div class="card-block">
             <!--<h4 class="card-title">Card title  body</h4>-->
-            <!--<p class="card-text">Some example text. Some example text.</p>-->
-            <textarea class="form-control" rows="6" name=textarea></textarea>
+           <p class="card-text">{{message}}</p>
+            <textarea class="form-control" id="textarea1" rows="6" name=textarea></textarea>
             <!--<a href="#" class="card-link">Card link</a>-->
             <!--<a href="#" class="card-link">Another link</a>-->
         </div>
-        <div class="card-footer"><button class="btn btn-primary" style="float:right">提交</button></div>
+        <div class="card-footer"><button v-on:click="refreshMessage" class="btn btn-primary" style="float:right">提交</button></div>
     </div>
 
 </div>
 <div class="container" >
 
-    <!--<div class="card" style="margin-bottom:30px">-->
 
-    <!--<div class="card-block" >-->
-    <!--<h4 class="card-title">Card title  block</h4>-->
-    <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-    <!--<a href="#" class="card-link">Card link</a>-->
-    <!--<a href="#" class="card-link">Another link</a>-->
-    <!--</div>-->
-    <!--</div>-->
     <tr th:each="ans:${answers}">
         <td>
             <div class="card" style="margin-bottom: 10px; margin-top: 20px">
@@ -92,8 +84,48 @@
             </div>
         </td>
     </tr>
-
-
 </div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        methods: {
+            refreshMessage: function (){
+                var da=$("textarea#textarea1").val();
+                $.ajax({
+                    url:'/questionAdd',
+                    type:'POST', //GET
+                    async:true,    //或false,是否异步
+                    data:{
+                        question_id:0,
+                        user_id:12,
+                        question_conent:da
+                    },
+                    timeout:5000,    //超时时间
+                    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                    beforeSend:function(xhr){
+                        console.log(xhr)
+                        console.log('发送前')
+                    },
+                    success:function(data,textStatus,jqXHR){
+                        if(data==1){
+                            window.alert("成功")
+                        }
+                    },
+                    error:function(xhr,textStatus){
+                        console.log('错误')
+                        console.log(xhr)
+                        console.log(textStatus)
+                    },
+                    complete:function(){
+                        console.log('结束')
+                    }
+                })
+            }
+        }
+    })
+</script>
 </body>
 </html>
