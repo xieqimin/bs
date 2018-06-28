@@ -1,6 +1,6 @@
 package com.zx.bs.Dao;
 
-import com.zx.bs.entity.Answer;
+import com.zx.bs.model.Answer;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -10,13 +10,13 @@ public interface AnswerDao {
     @Select("select * from answer where answer_id=#{id}")
     Answer findAnswerById(@Param("id") Integer id);
 
-    @Insert("insert into answer (question_id,user_id,answer_content) values(#{question_id},#{user_id},#{answer_content});")
+    @Insert("insert into answer (question_id,user_id,answer_content) values(#{question_id},#{user.user_id},#{answer_content});")
     Integer insertAnswer(Answer answer);
 
     @Update("update answer set answer_content=#{answer_content} where answer_id=#{answer_id}")
     Integer updateAnswer(Answer answer);
 
-    @Select("select * from answer where question_id=#{id}")
+    @Select("select answer.answer_id, answer.question_id,answer.answer_content,user.user_id 'user.user_id' , user.user_name 'user.user_name' from answer inner join user on answer.user_id=user.user_id where question_id=#{id}")
     List<Answer> findAnswerByQuestionId(@Param("id") Integer id);
     //
     @Select("select * from answer where user_id=#{id}")

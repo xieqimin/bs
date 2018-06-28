@@ -1,4 +1,4 @@
-package com.zx.bs.entity;
+package com.zx.bs.model;
 
 import lombok.Data;
 

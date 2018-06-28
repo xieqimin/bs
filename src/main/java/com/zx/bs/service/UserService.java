@@ -2,7 +2,7 @@ package com.zx.bs.service;
 
 
 import com.zx.bs.Dao.UserDao;
-import com.zx.bs.entity.User;
+import com.zx.bs.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

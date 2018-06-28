@@ -2,7 +2,7 @@ package com.zx.bs.service;
 
 
 import com.zx.bs.Dao.QuestionDao;
-import com.zx.bs.entity.Question;
+import com.zx.bs.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

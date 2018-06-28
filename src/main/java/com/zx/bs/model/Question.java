@@ -1,4 +1,4 @@
-package com.zx.bs.entity;
+package com.zx.bs.model;
 
 import lombok.Data;
 
@@ -7,9 +7,7 @@ import lombok.Data;
 public class Question {
 
     private int question_id;
-    private int user_id;
     private String question_conent;
-
-
+    private User user;
 
 }

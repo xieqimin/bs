@@ -2,7 +2,7 @@ package com.zx.bs.service;
 
 import com.zx.bs.Dao.AnswerDao;
 
-import com.zx.bs.entity.Answer;
+import com.zx.bs.model.Answer;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

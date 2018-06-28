@@ -1,7 +1,7 @@
 package com.zx.bs.controller;
 
-import com.zx.bs.entity.Answer;
-import com.zx.bs.entity.Question;
+import com.zx.bs.model.Answer;
+import com.zx.bs.model.Question;
 import com.zx.bs.service.AnswerService;
 import com.zx.bs.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class QuestionController {
     @RequestMapping(value="/questionAdd", method = {RequestMethod.POST})
     @ResponseBody
     public Integer addTeacher(Question question){
-        System.out.println("hdfgd");
+        //TODO userid
         Integer result=questionService.insertQuestion(question);
         System.out.println("hd");
         return result;
@@ -56,12 +56,19 @@ public class QuestionController {
     //通过问题id查询问题
     @RequestMapping(value="/question/{id}", method = {RequestMethod.GET})
     //TODO ???是否返回界面 是否返回回答列表 是 是
-    public ModelAndView findQuestionById(@PathVariable("id") Integer id ,Map<String,Object> map){
+    public ModelAndView findQuestionById(@PathVariable("id") Integer id ,HttpSession session, Map<String,Object> map){
         //TODO
         Question question= questionService.findQuestionById(id);
         List<Answer> answerList=answerService.findAnswerByQuestionId(id);
         map.put("question",question);
         map.put("answers",answerList);
+        if(session.getAttribute("user_id")!=null)
+        {
+            map.put("login", true);
+            map.put("user_name",session.getAttribute("user_name"));
+        }else {
+            map.put("login", false);
+        }
         return new ModelAndView("question",map);
     }
 
@@ -73,6 +80,14 @@ public class QuestionController {
         return ""+result;
     }
 
+    @RequestMapping(value="/user/{id}", method = {RequestMethod.GET})
+    //???连带问题 用户界面
+    @ResponseBody
+    public List<Answer> findAnswerByStudentId(@PathVariable("id") Integer id){
+        List<Question> questionList= questionService.findQuestionByUserId(id);
+        List<Answer> answerList=answerService.findAnswerByUserId(id);
+        return answerList;
+    }
 
     //通过课程id查询问题，返回问题列表
 //    @RequestMapping(value="/questionFind/{id}", method = {RequestMethod.GET})

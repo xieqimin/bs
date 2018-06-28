@@ -1,6 +1,6 @@
 package com.zx.bs.Dao;
 
-import com.zx.bs.entity.User;
+import com.zx.bs.model.User;
 import org.apache.ibatis.annotations.*;
 
 @Mapper

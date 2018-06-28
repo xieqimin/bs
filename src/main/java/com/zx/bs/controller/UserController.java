@@ -1,6 +1,6 @@
 package com.zx.bs.controller;
 
-import com.zx.bs.entity.User;
+import com.zx.bs.model.User;
 import com.zx.bs.service.QuestionService;
 import com.zx.bs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+
+//TODO 登陆id addquestiontianjiauserid
+//TODO html模板更改
+//TODO 路径
 
 @Controller
 public class UserController {
@@ -25,8 +29,8 @@ public class UserController {
     public ModelAndView login(User user, HttpSession session, Map<String,Object> map){
         int id=user.getUser_id();
         String pwd=user.getUser_passwd();
-        System.out.println(id);
-        System.out.println(pwd);
+        //System.out.println(id);
+        //System.out.println(pwd);
         Integer result= userService.findStudentByIdAndPasswd(id,pwd);
         if(result==1) {
             session.setAttribute("user_id", id);
