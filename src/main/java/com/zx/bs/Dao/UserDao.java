@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface UserDao {
     @Select("select * from user where user_id=#{id}")
-    User findUserById(@Param("id") Integer id);
+    User findUserById(@Param("id") String id);
 
     @Select("select * from user where user_id=#{id},user_passwd=#{pwd}")
     User findUserByIdAndPasswd(@Param("id") Integer id, @Param("pwd") String pwd);
@@ -15,5 +15,5 @@ public interface UserDao {
     Integer InsertUser(User user);
 
     @Delete("delete from user where user_id =#{id}")
-    Integer DeleteUserById(@Param("id") Integer id);
+    Integer DeleteUserById(@Param("id") String id);
 }

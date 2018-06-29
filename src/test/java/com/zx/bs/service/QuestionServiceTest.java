@@ -26,7 +26,7 @@ public class QuestionServiceTest {
         Question question=new Question();
         question.setQuestion_conent("123");
         User user=new User();
-        user.setUser_id(12);
+        user.setUser_id("12");
         question.setUser(user);
 
         int result=questionService.insertQuestion(question);

@@ -12,7 +12,7 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public Integer findUserByIdAndPasswd(int id, String pwd) {
+    public Integer findUserByIdAndPasswd(String id, String pwd) {
         User user = userDao.findUserById(id);
         if (user != null)
             if (user.getUser_passwd().equals(pwd))
@@ -27,11 +27,11 @@ public class UserService {
         return integer;
     }
 
-    public Integer deleteUserById(int id){
+    public Integer deleteUserById(String id){
         Integer integer= userDao.DeleteUserById(id);
         return integer;
     }
-    public User findUserById(int id){
+    public User findUserById(String id){
         User student= userDao.findUserById(id);
         return student;
     }

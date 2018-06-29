@@ -25,7 +25,7 @@ public class UserController {
     @RequestMapping(value="/login", method = {RequestMethod.POST})
     @ResponseBody
     public Integer login(User user, HttpSession session){
-        int id=user.getUser_id();
+        String id=user.getUser_id();
         String pwd=user.getUser_passwd();
         //System.out.println(id);
         //System.out.println(pwd);

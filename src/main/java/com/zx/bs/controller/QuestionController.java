@@ -50,7 +50,7 @@ public class QuestionController {
         //TODO userid
         Integer result;
         if(session.getAttribute("user_id")!=null){
-            question.getUser().setUser_id((Integer)session.getAttribute("user_id"));
+            question.getUser().setUser_id((String)session.getAttribute("user_id"));
             result=questionService.insertQuestion(question);
         }
         else {

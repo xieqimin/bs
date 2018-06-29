@@ -28,7 +28,7 @@ public class AnswerController {
         //TODO 前端测试
         Integer result;
         if(session.getAttribute("user_id")!=null){
-            answer.getUser().setUser_id((Integer)session.getAttribute("user_id"));
+            answer.getUser().setUser_id((String) session.getAttribute("user_id"));
             result=answerService.insertanswer(answer);
         }
         else {
