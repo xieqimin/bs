@@ -46,10 +46,16 @@ public class QuestionController {
     //添加问题
     @RequestMapping(value="/questionAdd", method = {RequestMethod.POST})
     @ResponseBody
-    public Integer addTeacher(Question question){
+    public Integer addQusetion(Question question , HttpSession session){
         //TODO userid
-        Integer result=questionService.insertQuestion(question);
-        System.out.println("hd");
+        Integer result;
+        if(session.getAttribute("user_id")!=null){
+            question.getUser().setUser_id((Integer)session.getAttribute("user_id"));
+            result=questionService.insertQuestion(question);
+        }
+        else {
+            result=-1;
+        }
         return result;
     }
 
@@ -83,18 +89,10 @@ public class QuestionController {
     @RequestMapping(value="/user/{id}", method = {RequestMethod.GET})
     //???连带问题 用户界面
     @ResponseBody
-    public List<Answer> findAnswerByStudentId(@PathVariable("id") Integer id){
+    public List<Answer> findAnswerByUserId(@PathVariable("id") Integer id){
         List<Question> questionList= questionService.findQuestionByUserId(id);
         List<Answer> answerList=answerService.findAnswerByUserId(id);
         return answerList;
     }
 
-    //通过课程id查询问题，返回问题列表
-//    @RequestMapping(value="/questionFind/{id}", method = {RequestMethod.GET})
-//    //???
-//    @ResponseBody
-//    public List<Question> findQuestionByCourseId(@PathVariable("id") Integer id){
-//        //TODO
-//        return questionService.findQuestionByCourseId(id);
-//    }
 }

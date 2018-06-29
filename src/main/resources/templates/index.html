@@ -14,15 +14,13 @@
 
 
    <nav class="navbar navbar-expand-sm bg-light navbar-light">
-       <a class="navbar-brand" href="/" style="margin-left: 80px">WenDao</a>
+       <a class="navbar-brand" href="/" style="margin-left: 90px">Wen</a>
        <ul class="navbar-nav">
-           <li class="nav-item active">
-               <a class="nav-link" href="#">Active</a>
-           </li>
+
            <li class="nav-item">
                <a class="nav-link" href="#">Link</a>
            </li>
-           <li class="nav-item" style="margin-right: 600px">
+           <li class="nav-item" style="margin-right: 650px">
                <a class="nav-link" href="/editquestion.html">提问</a>
            </li>
            <li class="nav-item">
@@ -39,56 +37,29 @@
            </li>
        </ul>
    </nav>
-   <div class="container">
 
-       <!--<div class="card" style="margin-bottom:30px">-->
-
-           <!--<div class="card-block" >-->
-               <!--<h4 class="card-title">Card title  block</h4>-->
-               <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-               <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-               <!--<a href="#" class="card-link">Card link</a>-->
-               <!--<a href="#" class="card-link">Another link</a>-->
-           <!--</div>-->
-       <!--</div>-->
-       <div class="card" style="margin-bottom:20px">
-           <div class="card-header">头部</div>
-           <div class="card-body">
-               <h4 class="card-title">Card title  body</h4>
-               <p class="card-text">Some example text. Some example text.</p>
-               <a href="#" class="card-link">Card link</a>
-               <a href="#" class="card-link">Another link</a>
-           </div>
-           <div class="card-footer">底部</div>
-       </div>
-
-   </div>
    <div class="container" >
 
-       <!--<div class="card" style="margin-bottom:30px">-->
-
-       <!--<div class="card-block" >-->
-       <!--<h4 class="card-title">Card title  block</h4>-->
-       <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-       <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-       <!--<a href="#" class="card-link">Card link</a>-->
-       <!--<a href="#" class="card-link">Another link</a>-->
-       <!--</div>-->
-       <!--</div>-->
        <tr th:each="qu:${question}">
            <td>
                <div class="card" style="margin-bottom: 10px; margin-top: 20px">
                    <div class="card-body">
                        <h4 class="card-title" th:text="${qu.user.user_name}">Card title  body</h4>
                        <p class="card-text" th:text="${qu.question_conent}">Some example text. Some example text.</p>
-                       <a href="/question/{qu.question_id}" class="card-link">Card link</a>
+                       <!--<a href="/question/{qu.question_id}" class="card-link">Card link</a>-->
                        <a href="#" th:href="@{/question/{questionid}(questionid=${qu.question_id})}" class="card-link">查看回答</a>
                    </div>
                </div>
            </td>
        </tr>
 
-
+       <div class="card" style="margin-bottom: 10px; margin-top: 20px">
+           <div class="card-body">
+               <p class="card-text" >还有一些界面未完成，还在想这些界面的设计和实现，
+                   还有就是没怎么学习前端，界面写起来有些慢</p>
+               <!--<p class="card-text" >Some example text. Some example text.</p>-->
+           </div>
+       </div>
    </div>
 </body>
 </html>

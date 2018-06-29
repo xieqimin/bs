@@ -46,26 +46,14 @@
         <div class="card-body">
             <h4 class="card-title" th:text="${question.user.user_name}">Card title  body</h4>
             <p class="card-text" th:text="${question.question_conent}">Some example text. Some example text.</p>
+            <p  id="questionId" hidden="hidden" th:text="${question.question_id}" ></p>
         </div>
     </div>
-    <!--<div class="card" style="margin-bottom:30px">-->
 
-    <!--<div class="card-block" >-->
-    <!--<h4 class="card-title">Card title  block</h4>-->
-    <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-    <!--<a href="#" class="card-link">Card link</a>-->
-    <!--<a href="#" class="card-link">Another link</a>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="card" id="app" style="margin-bottom: 10px; margin-top: 20px;height: auto">
         <div class="card-header">我的回答</div>
         <div class="card-block">
-            <!--<h4 class="card-title">Card title  body</h4>-->
-           <p class="card-text">{{message}}</p>
             <textarea class="form-control" id="textarea1" rows="6" name=textarea></textarea>
-            <!--<a href="#" class="card-link">Card link</a>-->
-            <!--<a href="#" class="card-link">Another link</a>-->
         </div>
         <div class="card-footer"><button v-on:click="refreshMessage" class="btn btn-primary" style="float:right">提交</button></div>
     </div>
@@ -73,14 +61,13 @@
 </div>
 <div class="container" >
 
-
     <tr th:each="ans:${answers}">
         <td>
             <div class="card" style="margin-bottom: 10px; margin-top: 20px">
                 <div class="card-body">
                     <h4 class="card-title" th:text="${ans.user.user_name}">Card title  body</h4>
                     <p class="card-text" th:text="${ans.answer_content}">Some example text. Some example text.</p>
-                    <a href="/question/{qu.question_id}" class="card-link">Card link</a>
+                    <!--<a href="/question/{qu.question_id}" class="card-link">Card link</a>-->
                     <a href="#" th:href="@{/answer/{answerid}(answerid=${ans.answer_id})}" class="card-link">Another link</a>
                 </div>
             </div>
@@ -95,15 +82,16 @@
         },
         methods: {
             refreshMessage: function (){
-                var da=$("textarea#textarea1").val();
+                var dataqid=$("p#questionId").val();
+                var datacon=$("textarea#textarea1").val();
+
                 $.ajax({
                     url:'/questionAdd',
                     type:'POST', //GET
                     async:true,    //或false,是否异步
                     data:{
-                        question_id:0,
-                        user_id:12,
-                        question_conent:da
+                        question_id:dataqid,
+                        answer_conent:datacon
                     },
                     timeout:5000,    //超时时间
                     dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
@@ -112,6 +100,10 @@
                         if(data==1){
                             window.alert("成功")
                         }
+                        if(data==-1){
+                            window.alert("请先登陆")
+                        }
+
                     },
                     error:function(xhr,textStatus){
                         console.log('错误')

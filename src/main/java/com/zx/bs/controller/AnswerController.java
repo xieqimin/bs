@@ -26,14 +26,15 @@ public class AnswerController {
     public Integer addAnswer (Answer answer ,HttpSession session){
 
         //TODO 前端测试
-
+        Integer result;
         if(session.getAttribute("user_id")!=null){
             answer.getUser().setUser_id((Integer)session.getAttribute("user_id"));
+            result=answerService.insertanswer(answer);
         }
         else {
-            // return 登陆 ? 登陆后跳转到原来的url?
+            // TODO return 登陆 ? 登陆后跳转到原来的url?
+            result=-1;
         }
-        Integer result=answerService.insertanswer(answer);
         return result;
     }
 

@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
     @Autowired
-    private UserDao studentDao;
+    private UserDao userDao;
 
-    public Integer findStudentByIdAndPasswd(int id, String pwd) {
-        User user = studentDao.findUserById(id);
+    public Integer findUserByIdAndPasswd(int id, String pwd) {
+        User user = userDao.findUserById(id);
         if (user != null)
             if (user.getUser_passwd().equals(pwd))
                 return 1;
@@ -22,17 +22,17 @@ public class UserService {
         else return -2;//没有此id
     }
     @Transactional
-    public Integer insertStudent(User student){
-        Integer integer=studentDao.InsertUser(student);
+    public Integer insertUser(User student){
+        Integer integer= userDao.InsertUser(student);
         return integer;
     }
 
-    public Integer deleteStudentById(int id){
-        Integer integer=studentDao.DeleteUserById(id);
+    public Integer deleteUserById(int id){
+        Integer integer= userDao.DeleteUserById(id);
         return integer;
     }
-    public User findStudentById(int id){
-        User student=studentDao.findUserById(id);
+    public User findUserById(int id){
+        User student= userDao.findUserById(id);
         return student;
     }
 }

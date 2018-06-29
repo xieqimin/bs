@@ -8,15 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 //TODO 登陆id addquestiontianjiauserid
 //TODO html模板更改
 //TODO 路径
-
+//TODO 问题和回答的修改 用户界面
 @Controller
 public class UserController {
     @Autowired
@@ -25,46 +23,46 @@ public class UserController {
     private QuestionService questionService;
 
     @RequestMapping(value="/login", method = {RequestMethod.POST})
-
-    public ModelAndView login(User user, HttpSession session, Map<String,Object> map){
+    @ResponseBody
+    public Integer login(User user, HttpSession session){
         int id=user.getUser_id();
         String pwd=user.getUser_passwd();
         //System.out.println(id);
         //System.out.println(pwd);
-        Integer result= userService.findStudentByIdAndPasswd(id,pwd);
+        Integer result= userService.findUserByIdAndPasswd(id,pwd);
         if(result==1) {
             session.setAttribute("user_id", id);
             //return "redirect:/";
-            User user1=userService.findStudentById(id);
+            User user1=userService.findUserById(id);
             session.setAttribute("user_name",user1.getUser_name());
-            map.put("user_name",user1.getUser_name());
-            map.put("question",questionService.findQuestion());
-            map.put("login",true);
-            return new ModelAndView("index");
-        }else {
-            if (result==-1) {//pwd
-                map.put("error","密码错误");
-                return new ModelAndView("error",map);
-            }
-            else {//id
-                map.put("error","没有此账户");
-                return new ModelAndView("error",map);
-            }
+//            map.put("user_name",user1.getUser_name());
+//            map.put("question",questionService.findQuestion());
+//            map.put("login",true);
         }
+        return result;
     }
     //TODO
     //
     @RequestMapping(value="/registered", method = {RequestMethod.POST})
     @ResponseBody
-    public Integer addTeacher(User user){
-        Integer result= userService.insertStudent(user);
+    public Integer addUser(User user, HttpSession session){
+        Integer result= userService.insertUser(user);
+        if(result==1) {
+            session.setAttribute("user_id", user.getUser_id());
+            //return "redirect:/";
+            session.setAttribute("user_name",user.getUser_name());
+//            map.put("user_name",user1.getUser_name());
+//            map.put("question",questionService.findQuestion());
+//            map.put("login",true);
+        }
         return result;
     }
 
     //推出登陆
     @RequestMapping(value="/out")
-    public String StudentOut(HttpSession session){
+    public String UserOut(HttpSession session){
         session.removeAttribute("user_id");
+        session.removeAttribute("user_name");
         //TODO
         return "redirect:/login.html";
     }
