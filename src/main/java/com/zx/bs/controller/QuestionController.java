@@ -42,6 +42,20 @@ public class QuestionController {
         }
         return new ModelAndView("index",map);
     }
+    @RequestMapping(value="/editquestion")
+    //TODO ???是否返回界面 是否返回回答列表
+    public ModelAndView editquestion(Map<String,Object> map, HttpSession session){
+        //TODO
+
+        if(session.getAttribute("user_id")!=null)
+        {
+            map.put("login", true);
+            map.put("user_name",session.getAttribute("user_name"));
+        }else {
+            map.put("login", false);
+        }
+        return new ModelAndView("editquestion",map);
+    }
 
     //添加问题
     @RequestMapping(value="/questionAdd", method = {RequestMethod.POST})
