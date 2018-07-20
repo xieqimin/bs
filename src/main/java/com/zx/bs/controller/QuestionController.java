@@ -2,6 +2,7 @@ package com.zx.bs.controller;
 
 import com.zx.bs.model.Answer;
 import com.zx.bs.model.Question;
+import com.zx.bs.model.User;
 import com.zx.bs.service.AnswerService;
 import com.zx.bs.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,9 @@ public class QuestionController {
         //TODO userid
         Integer result;
         if(session.getAttribute("user_id")!=null){
-            question.getUser().setUser_id((String)session.getAttribute("user_id"));
+            User user=new User();
+            user.setUser_id((String)session.getAttribute("user_id"));
+            question.setUser(user);
             result=questionService.insertQuestion(question);
         }
         else {

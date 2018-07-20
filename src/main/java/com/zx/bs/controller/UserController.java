@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 //TODO 登陆id addquestiontianjiauserid
 //TODO html模板更改
 //TODO 路径
-//TODO 问题和回答的修改 用户界面
+//TODO 问题和回答的修改 用户界面 回答界面？
 @Controller
 public class UserController {
     @Autowired
@@ -28,7 +28,7 @@ public class UserController {
         String id=user.getUser_id();
         String pwd=user.getUser_passwd();
         //System.out.println(id);
-        //System.out.println(pwd);
+        //System.out.println(pwd)
         Integer result= userService.findUserByIdAndPasswd(id,pwd);
         if(result==1) {
             session.setAttribute("user_id", id);

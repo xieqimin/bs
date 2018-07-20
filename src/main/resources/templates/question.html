@@ -78,16 +78,16 @@
         },
         methods: {
             refreshMessage: function (){
-                var dataqid=$("p#questionId").val();
+                var dataqid=$("p#questionId").text();
                 var datacon=$("textarea#textarea1").val();
 
                 $.ajax({
-                    url:'/questionAdd',
+                    url:'/answerAdd',
                     type:'POST', //GET
                     async:true,    //或false,是否异步
                     data:{
                         question_id:dataqid,
-                        answer_conent:datacon
+                        answer_content:datacon
                     },
                     timeout:5000,    //超时时间
                     dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
